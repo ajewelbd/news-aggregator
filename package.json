@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "setup": "node setup.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
