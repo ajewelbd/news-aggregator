@@ -2,14 +2,14 @@ import express from "express";
 import {
 	addNewRSSFeedSource,
 	deleteARSSFeedSource,
-	getAllRSSFeedSource,
-	getSingleRSSFeedSource,
+	getRSSFeedSources,
+	getRSSFeedSource,
 } from "../../controllers/v1/RSSFeedsController.js";
 
 const router = express.Router();
 
-router.get("/", getAllRSSFeedSource);
-router.get("/:id", getSingleRSSFeedSource);
+router.get("/", getRSSFeedSources);
+router.get("/:id", getRSSFeedSource);
 router.post("/", addNewRSSFeedSource);
 router.delete("/:id", deleteARSSFeedSource);
 

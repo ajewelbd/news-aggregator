@@ -6,7 +6,7 @@ import successResponseHandler from "../../utils/successResponseHandler.js";
 const RSSFeedSource = new RSSFeedSourceModel();
 
 // Get all RSS Feed sources
-export const getAllRSSFeedSource = asyncHandler(async (req, res) => {
+export const getRSSFeedSources = asyncHandler(async (req, res) => {
 	const RSSFeedSources = await RSSFeedSource.getAll();
 	successResponseHandler(
 		res,
@@ -16,16 +16,16 @@ export const getAllRSSFeedSource = asyncHandler(async (req, res) => {
 });
 
 // Get a single RSS Feed sources
-export const getSingleRSSFeedSource = asyncHandler(async (req, res) => {
+export const getRSSFeedSource = asyncHandler(async (req, res) => {
 	const { id } = req.params;
-	const RSSFeedSourceDetails = await RSSFeedSource.getById(id);
-	if (!RSSFeedSourceDetails) {
+	const RSSFeedSource = await RSSFeedSource.getById(id);
+	if (!RSSFeedSource) {
 		throw new NotFoundError("RSS Feed Source not found");
 	}
 
 	successResponseHandler(
 		res,
-		RSSFeedSourceDetails,
+		RSSFeedSource,
 		"RSS Feed Source retrieved successfully"
 	);
 });
