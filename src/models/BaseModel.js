@@ -34,6 +34,18 @@ class BaseModel {
 		return rows[0];
 	}
 
+	async bulkCreate(values, columns = "") {
+		columns = columns || this.columns;
+		const placeholder = getPlaceholders(columns.split(","), values);
+		const sql = `INSERT INTO ${this.table} (${columns}) VALUES ${placeholder} RETURNING *`;
+
+		// Flatten the rows into a single array of values
+		values = values.flat();
+
+		const { rows } = await query(sql, values);
+		return rows;
+	}
+
 	async softDelete(id) {
 		const sql = `UPDATE ${this.table} SET deleted_at = NOW() WHERE id = $1 RETURNING *`;
 		const { rows } = await query(sql, [id]);

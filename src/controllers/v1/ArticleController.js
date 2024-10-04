@@ -24,13 +24,16 @@ export const getArticle = asyncHandler(async (req, res) => {
 
 // Add a new Article
 export const addNewArticle = asyncHandler(async (req, res) => {
-	const { vendor, url } = req.body;
+	const { title, description, publication_date, source_url } = req.body;
 
-	if (!vendor || !url) {
+	if (!title || !publication_date || !source_url) {
 		throw new ValidationError();
 	}
 
-	const newArticle = await Article.create([vendor, url], "vendor,url");
+	const newArticle = await Article.create(
+		[title, description || "", publication_date, source_url],
+		"title,description,publication_date,source_url"
+	);
 	successResponseHandler(res, newArticle, "Article successfully created");
 });
 
