@@ -18,14 +18,14 @@ export const getRSSFeedSources = asyncHandler(async (req, res) => {
 // Get a single RSS Feed sources
 export const getRSSFeedSource = asyncHandler(async (req, res) => {
 	const { id } = req.params;
-	const RSSFeedSource = await RSSFeedSource.getById(id);
-	if (!RSSFeedSource) {
+	const singleRSSFeedSource = await RSSFeedSource.getById(id);
+	if (!singleRSSFeedSource) {
 		throw new NotFoundError("RSS Feed Source not found");
 	}
 
 	successResponseHandler(
 		res,
-		RSSFeedSource,
+		singleRSSFeedSource,
 		"RSS Feed Source retrieved successfully"
 	);
 });

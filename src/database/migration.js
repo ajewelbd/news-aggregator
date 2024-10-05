@@ -15,8 +15,8 @@ export const migration = async () => {
 		CREATE TABLE IF NOT EXISTS articles (
 			id SERIAL PRIMARY KEY,                  -- Auto-incrementing ID
 			title VARCHAR(255) NOT NULL,            -- Title of the article, required field
-			description TEXT,                       -- Description of the article, required field
-			publication_date DATE NOT NULL,         -- Date when the article was published
+			description TEXT,                       -- Description of the article,
+			publication_date DATE NOT NULL,         -- Date when the article was published, required field
 			source_url VARCHAR(500) NOT NULL,       -- URL of the article source, required field
 			topics JSONB,       					-- Extracted article topics
 			entities JSONB,       					-- Extracted article entities
@@ -24,6 +24,8 @@ export const migration = async () => {
 			updated_at TIMESTAMP DEFAULT NOW(),     -- Record update timestamp (default to current time)
 			deleted_at TIMESTAMP                    -- Timestamp when the article was deleted (soft delete)
 		);
+
+		INSERT INTO rss_feed_sources(vendor, url) VALUES('Al-Jazeera', 'https://rss.app/feeds/pTCTwby5mGsOXpjh.xml')
 	`;
 	try {
 		await query(sql);

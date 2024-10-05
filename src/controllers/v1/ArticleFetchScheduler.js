@@ -15,7 +15,7 @@ export const initiateArticleFetchScheduler = () => {
 			hour: 0,
 			dayOfTheMonth: "*",
 			month: "*",
-			dayOfTheWeek: 0,
+			dayOfTheWeek: "*",
 		};
 
 		articleConfig =
