@@ -1,0 +1,9 @@
+{
+    "article": {
+        "minute": 0,
+        "hour": 0,
+        "dayOfTheMonth": "*",
+        "month": "*",
+        "dayOfTheWeek": 0
+    }
+}

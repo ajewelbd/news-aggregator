@@ -4,7 +4,7 @@ const successResponseHandler = (
 	message = "Success",
 	statusCode = 200
 ) => {
-	res.status(statusCode).json({
+	res?.status(statusCode).json({
 		status: "success",
 		code: statusCode,
 		message,

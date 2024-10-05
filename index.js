@@ -4,6 +4,7 @@ import cors from "cors";
 import pool from "./src/config/db.js";
 import routes from "./src/routes/v1/index.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
+import { initiateArticleFetchScheduler } from "./src/controllers/v1/ArticleFetchScheduler.js";
 
 // Load environment variable
 dotenv.config();
@@ -29,6 +30,9 @@ app.use("*", (_, res) => {
 
 // Global error handler
 app.use(errorHandler);
+
+// artcile fetch scheduler initiate
+initiateArticleFetchScheduler();
 
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 3000;

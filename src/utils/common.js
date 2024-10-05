@@ -1,3 +1,4 @@
+import fs from "fs";
 import { ValidationError } from "./errors.js";
 
 // Function to make dynamic placeholder for a sql query according to the columns.
@@ -39,5 +40,16 @@ export const formatDate = (pubDate) => {
 		return `${year}-${month}-${day}`;
 	} catch (e) {
 		return "";
+	}
+};
+
+export const readJsonFileSync = (filePath) => {
+	try {
+		const data = fs.readFileSync(filePath, "utf-8"); // Read file synchronously
+		const jsonData = JSON.parse(data); // Parse JSON data
+		return jsonData;
+	} catch (error) {
+		console.error("Error reading JSON file:", error);
+		return null;
 	}
 };
