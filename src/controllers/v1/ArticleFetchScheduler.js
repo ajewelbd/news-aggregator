@@ -23,8 +23,6 @@ export const initiateArticleFetchScheduler = () => {
 	}
 	const schedule = `${articleConfig.minute} ${articleConfig.hour} ${articleConfig.dayOfTheMonth} ${articleConfig.month} ${articleConfig.dayOfTheWeek}`;
 
-	console.log(schedule);
-
 	// Schedule the task to run every hour
 	cron.schedule(schedule, async () => {
 		try {

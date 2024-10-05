@@ -49,8 +49,11 @@ npm run setup
 npm run dev
 ```
 
--   After that you will see the message:
-    [Server running on http://localhost:3000]
+-   After that you will see the following message:
+
+```sh
+Server running on http://localhost:3000
+```
 
 ## Run via docker
 
@@ -235,9 +238,9 @@ const articles = await Promise.all(
 -   Input Text: It uses either the contentSnippet or title of the article as input for the extraction.
 -   Topics and Entities: The extracted topics and entities are then saved as JSON strings and inserted into the database.
 
-# API endpoints
+# API endpoints (prefix-> /api/v1/)
 
-These endpoints allow you to handle RSS FEED Sources & articles.
+These endpoints allow you to handle RSS FEED Sources & articles. Example: http://localhost:3000/api/v1/articles
 
 ## GET
 
