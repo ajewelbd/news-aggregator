@@ -18,6 +18,8 @@ export const migration = async () => {
 			description TEXT,                       -- Description of the article, required field
 			publication_date DATE NOT NULL,         -- Date when the article was published
 			source_url VARCHAR(500) NOT NULL,       -- URL of the article source, required field
+			topics JSONB,       					-- Extracted article topics
+			entities JSONB,       					-- Extracted article entities
 			created_at TIMESTAMP DEFAULT NOW(),     -- Record creation timestamp (default to current time)
 			updated_at TIMESTAMP DEFAULT NOW(),     -- Record update timestamp (default to current time)
 			deleted_at TIMESTAMP                    -- Timestamp when the article was deleted (soft delete)

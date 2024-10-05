@@ -24,15 +24,37 @@ export const getArticle = asyncHandler(async (req, res) => {
 
 // Add a new Article
 export const addNewArticle = asyncHandler(async (req, res) => {
-	const { title, description, publication_date, source_url } = req.body;
+	const {
+		title,
+		description,
+		publication_date,
+		source_url,
+		topics,
+		entities,
+	} = req.body;
 
 	if (!title || !publication_date || !source_url) {
 		throw new ValidationError();
 	}
 
+	if (topics && !Array.isArray(topics)) {
+		throw new ValidationError("Topics must be an array");
+	}
+
+	if (entities && !Array.isArray(entities)) {
+		throw new ValidationError("Entities must be an array");
+	}
+
 	const newArticle = await Article.create(
-		[title, description || "", publication_date, source_url],
-		"title,description,publication_date,source_url"
+		[
+			title,
+			description || "",
+			publication_date,
+			source_url,
+			JSON.stringify(topics || []),
+			JSON.stringify(entities || []),
+		],
+		"title,description,publication_date,source_url,topics,entities"
 	);
 	successResponseHandler(res, newArticle, "Article successfully created");
 });
