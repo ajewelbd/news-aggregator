@@ -17,6 +17,22 @@ class BaseModel {
 		return rows;
 	}
 
+	async filter(columns = "", filterString = "") {
+		columns = columns || this.columns;
+
+		let condition = this.hasSoftDelete ? " WHERE deleted_at IS NULL" : "";
+		if (filterString) {
+			if (condition === "") condition += " WHERE ";
+			else condition += " AND ";
+
+			condition += filterString;
+		}
+
+		const sql = `SELECT ${columns} FROM ${this.table}${condition}`;
+		const { rows } = await query(sql);
+		return rows;
+	}
+
 	async getById(id, columns = "") {
 		columns = columns || this.columns;
 		const sql = `SELECT ${columns} FROM ${this.table} WHERE id = $1${

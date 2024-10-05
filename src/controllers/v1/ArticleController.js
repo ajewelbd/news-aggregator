@@ -7,7 +7,24 @@ const Article = new ArticleModel();
 
 // Get all Articles
 export const getArticles = asyncHandler(async (req, res) => {
-	const articles = await Article.getAll();
+	const { publication_date, search } = req.query;
+
+	let articles = [];
+
+	if (publication_date || search) {
+		let condition = "";
+		if (publication_date)
+			condition = `publication_date='${publication_date}'`;
+
+		if (search) {
+			if (condition) condition += " AND ";
+			condition += `topics @> '["${search}"]' OR entities @> '["${search}"]'`;
+		}
+
+		articles = await Article.filter("", condition);
+	} else {
+		articles = await Article.getAll();
+	}
 	successResponseHandler(res, articles, "Articles retrieved successfully");
 });
 

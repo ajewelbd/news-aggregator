@@ -4,6 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 const { Pool } = pkg;
 
+// To fix unexpected time adding for date only column
+// 1082 for date type
+pkg.types.setTypeParser(1082, function (stringValue) {
+	return stringValue;
+});
+
 const { DB_HOST, DB_USER, DB_PASS, DB_PORT, DB_NAME } = process.env;
 
 // Create a connection pool at boot time
